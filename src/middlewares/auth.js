@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-export default function (req, res, next) {
+function auth(req, res, next) {
   try {
     const { token } = req.cookies;
     if (!token) {
@@ -16,3 +16,5 @@ export default function (req, res, next) {
     });
   }
 }
+
+module.exports = auth;

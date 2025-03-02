@@ -1,10 +1,10 @@
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
-import cookieParser from "cookie-parser";
-import db from "./src/models";
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+const cookieParser = require("cookie-parser");
+const db = require("./src/models");
 
-import { userRoute } from "./src/routes";
+const { userRoute } = require("./src/routes");
 
 const app = express();
 
@@ -14,5 +14,6 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/user", userRoute);
+app.use("/api/admin", userRoute);
 
-module.exports = app;
+module.exports = app

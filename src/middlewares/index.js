@@ -1,3 +1,3 @@
-import auth from "./auth";
+const auth = require("./auth");
 
-export { auth };
+module.exports = { auth };

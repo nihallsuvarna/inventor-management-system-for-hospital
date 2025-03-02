@@ -1,3 +1,3 @@
-import userRoute from "./user.route";
+const userRoute = require("./user.route");
 
-export { userRoute };
+module.exports = { userRoute };

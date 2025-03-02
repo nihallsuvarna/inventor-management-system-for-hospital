@@ -1,4 +1,4 @@
-import signIn from "./sign-in.controller";
-import register from "./register.controller";
+const signIn = require("./sign-in.controller");
+const register = require("./register.controller");
 
-export { signIn, register };
+module.exports = { signIn, register };

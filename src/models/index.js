@@ -32,7 +32,7 @@ db.OrderInwardItem = require("./order_inward_item.js")(sequelize, DataTypes);
 db.OrderInward = require("./order_inward.js")(sequelize, DataTypes);
 db.Item = require("./item.js")(sequelize, DataTypes);
 
-console.log('Models running')
+console.log("Models running");
 
 sequelize
   .authenticate()

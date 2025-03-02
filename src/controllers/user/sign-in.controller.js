@@ -1,7 +1,8 @@
-import bcrypt from "bcrypt";
-import { User, UserRole } from "../../models";
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { User, UserRole } = require("../../models");
 
-export default async function (req, res) {
+async function signIn(req, res) {
   const { username, password, role } = req.body;
 
   // Check
@@ -34,8 +35,14 @@ export default async function (req, res) {
     });
   }
 
-  // Check is Role match
+  // Check User role
   const getUserRole = await UserRole.findOne({ user_id: getUserData.id });
 
-  console.log(getUserRole);
+  const token = jwt.sign({
+    id: getUserData.id,
+    username: getUserData.username,
+    role: getUserData.role
+  });
 }
+
+module.exports = signIn;

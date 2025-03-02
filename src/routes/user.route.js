@@ -1,11 +1,15 @@
-import express from "express";
+const express = require("express");
 
-import { register, signIn } from "../controllers/user";
-import { auth } from "../middlewares";
+const { register, signIn } = require("../controllers/user");
+const { addRole } = require("../controllers/role");
+const { auth } = require("../middlewares");
 
 const route = express.Router();
 
 // Admin route
-route.post("/register", register)
+route.post("/register", register);
+route.post("/add-role", addRole);
 
 route.post("/sign-in", auth, signIn);
+
+module.exports = route;

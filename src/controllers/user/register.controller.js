@@ -1,6 +1,6 @@
-import { User } from "../../models";
+const { User } = require("../../models");
 
-export default async function (req, res) {
+async function register(req, res) {
   try {
     const { username, email } = req.body;
 
@@ -72,3 +72,5 @@ function validateEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 }
+
+module.exports = register;
