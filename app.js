@@ -4,7 +4,7 @@ const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const db = require("./src/models");
 
-const { userRoute } = require("./src/routes");
+const { userRoute, departmentRoute } = require("./src/routes");
 
 const app = express();
 
@@ -14,6 +14,9 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/user", userRoute);
-app.use("/api/admin", userRoute);
 
-module.exports = app
+// Admin
+app.use("/api/admin", userRoute);
+app.use("/api/admin", departmentRoute);
+
+module.exports = app;

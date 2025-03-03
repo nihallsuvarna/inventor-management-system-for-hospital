@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { User, UserRole } = require("../../models");
 
 async function signIn(req, res) {
-  const { username, password, role } = req.body;
+  const { username, password, roleId } = req.body;
 
   // Check
   if (username.trim() === "" || password.trim() === "") {
