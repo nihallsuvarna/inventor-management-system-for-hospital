@@ -7,6 +7,10 @@ This is the Repo for Inventor Management System for Hospital
 ### Items
 
 ### Categories
+#### 04-03-2025
+1. POST Add Category
+2. POST Edit Category
+3. GET Get All Category
 
 ### Suppliers
 
