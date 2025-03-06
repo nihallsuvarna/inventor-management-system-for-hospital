@@ -10,6 +10,6 @@ const route = express.Router();
 route.post("/add-category", addCategory);
 route.post("/edit-category", editCategory);
 
-route.get("./category", getAllCategory);
+route.get("/category", getAllCategory);
 
 module.exports = route;

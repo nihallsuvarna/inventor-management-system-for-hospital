@@ -37,6 +37,11 @@ This is the Repo for Inventor Management System for Hospital
 
 ### Role
 
+### Module
+#### 05-03-2025
+1. POST Add Module
+2. GET Module
+
 
 ### Utils
 #### 03-04-2025
