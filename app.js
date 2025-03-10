@@ -8,7 +8,9 @@ const {
   userRoute,
   departmentRoute,
   categoryRoute,
-  moduleRoute
+  moduleRoute,
+  itemRoute,
+  supplierRoute
 } = require("./src/routes");
 
 const app = express();
@@ -25,5 +27,9 @@ app.use("/api/admin", userRoute);
 app.use("/api/admin", departmentRoute);
 app.use("/api/admin", categoryRoute);
 app.use("/api/admin", moduleRoute);
+app.use("/api/admin", supplierRoute);
+
+//Items
+app.use("/api/item", itemRoute);
 
 module.exports = app;

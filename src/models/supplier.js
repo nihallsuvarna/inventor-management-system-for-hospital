@@ -18,6 +18,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       reference: db.Category,
       reference_key: "category_id"
+    },
+    postal_code: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   });
 

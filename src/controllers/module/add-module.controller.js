@@ -12,9 +12,17 @@ async function addModule(req, res) {
       });
     }
 
-    const module = await Module.findAll();
+    const module = await Module.findOne({ where: { label } });
 
-    const newModule = await module.create({
+    if (module) {
+      return res.status(403).json({
+        status: 403,
+        message: "Module already exists",
+        result: null
+      });
+    }
+
+    const newModule = await Module.create({
       label,
       description
     });
@@ -42,4 +50,4 @@ async function addModule(req, res) {
   }
 }
 
-module.exports = addModule
+module.exports = addModule;
