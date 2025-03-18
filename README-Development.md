@@ -5,6 +5,12 @@ This is the Repo for Inventor Management System for Hospital
 ## API while development
 
 ### Items
+#### 07-03-2025
+1. POST Add Item
+2. GET Get All Item
+3. POST Edit Item
+4. 
+
 
 ### Categories
 #### 04-03-2025
@@ -13,6 +19,13 @@ This is the Repo for Inventor Management System for Hospital
 3. GET Get All Category
 
 ### Suppliers
+#### 06-03-2025
+1. POST Add Supplier
+2. GET list all the suppliers
+3. GET find Supplier by label
+<!-- 4. PUT Update Supplier
+5. DELETE Delete Supplier -->
+
 
 ### Transactions Inward
 
@@ -40,7 +53,8 @@ This is the Repo for Inventor Management System for Hospital
 ### Module
 #### 05-03-2025
 1. POST Add Module
-2. GET Module
+2. GET All Module
+3. GET module by label
 
 
 ### Utils
