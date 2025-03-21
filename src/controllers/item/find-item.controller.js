@@ -1,9 +1,9 @@
-const { Item } = require("../../models");
+const { ItemsService } = require("../../services");
 
 async function findItem(req, res) {
   try {
     const { label } = req.body;
-    const item = await Item.findAll({ where: { label } });
+    const item = await ItemsService.getItemByLabel(label);
     if (!item) {
       return res.status(404).json({
         status: 404,

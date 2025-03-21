@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 const { User, Session } = require("../../models");
+const { UserService, SessionService } = require("../../services");
 const { Op, where } = require("sequelize");
 const { compareWithCurrentTime } = require("../../utils");
 
@@ -17,7 +18,7 @@ async function changePassword(req, res) {
       });
     }
 
-    const user = await User.findOne({ where: { username } });
+    const user = await UserService.existingUser(username);
 
     // Check if user exists
     if (!user) {
@@ -25,6 +26,14 @@ async function changePassword(req, res) {
         status: 404,
         message: "User not found",
         result: null
+      });
+    }
+
+    // Check if user old password is correct
+    if (!(await UserService.checkOldPassword(username, oldPassword))) {
+      return res.status(401).json({
+        status: 401,
+        message: "Incorrect old password"
       });
     }
 
@@ -48,9 +57,10 @@ async function changePassword(req, res) {
     }
 
     // check if session exists
-    const session = await Session.findOne({
-      where: { [Op.and]: [{ user_id: user.id }, { type: "register" }] }
-    });
+    const session = await SessionService.checkSessionWithType(
+      user.id,
+      "register"
+    );
 
     if (!session) {
       return res.status(403).json({
@@ -75,7 +85,7 @@ async function changePassword(req, res) {
     await user.update({ password: hashPassword });
 
     // Remove old sessions
-    await Session.destroy({ where: { user_id: user.id } });
+    await SessionService.deleteSessionByType(user.id, "register");
 
     return res.status(200).json({
       status: 200,

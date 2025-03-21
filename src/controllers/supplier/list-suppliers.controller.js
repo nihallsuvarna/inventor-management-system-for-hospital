@@ -1,8 +1,8 @@
-const { Supplier } = require("../../models");
+const { SuppliersService } = require("../../services");
 
 async function listSuppliers(req, res) {
   try {
-    const supplier = await Supplier.findAll();
+    const supplier = await SuppliersService.listAllSuppliers();
     if (!supplier) {
       return res.status(404).json({
         status: 404,

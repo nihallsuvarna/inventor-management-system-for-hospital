@@ -1,12 +1,8 @@
-const { Role } = require("../../models");
+const RoleService = require("../../services/role.service");
 
 async function addRole(req, res) {
   try {
     const { label, description, key } = req.body;
-
-    console.log(label, "label");
-    console.log(description, "description");
-    console.log(key, "key");
 
     if (label.trim() === "") {
       return res.status(400).json({
@@ -24,7 +20,7 @@ async function addRole(req, res) {
       });
     }
 
-    const role = await Role.findOne({ where: { key: key } });
+    const role = await RoleService.getRoleByKey(key);
 
     console.log(role, "role");
 
@@ -36,24 +32,17 @@ async function addRole(req, res) {
       });
     }
 
-    const newRole = new Role({ label, description, key });
+    const newRole = await RoleService.createRole({
+      label,
+      description,
+      key
+    });
 
-    newRole
-      .save()
-      .then(() =>
-        res.status(201).json({
-          status: 201,
-          message: "Role saved successfully",
-          result: null
-        })
-      )
-      .catch((err) =>
-        res.status(501).json({
-          status: 501,
-          message: "Something went wrong while saving",
-          result: err
-        })
-      );
+    return res.status(200).json({
+      status: 200,
+      message: "Role added successfully",
+      result: newRole
+    });
   } catch (err) {
     console.log(err);
     return res.status(501).json({

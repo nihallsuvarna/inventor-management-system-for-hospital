@@ -1,4 +1,4 @@
-const { Category } = require("../../models");
+const { CategoryService } = require("../../services");
 
 async function editCategory(req, res) {
   try {
@@ -14,7 +14,7 @@ async function editCategory(req, res) {
       });
     }
 
-    const category = await Category.findOne({ where: { key: key } });
+    const category = await CategoryService.getCategoryByKey(key);
 
     // Check if Category exists
     if (!category) {
@@ -26,12 +26,10 @@ async function editCategory(req, res) {
     }
 
     // Update Category
-    const updatedCategory = await category.set({
+    const response = await CategoryService.updateCategory(category.id, {
       label: label,
       description: description
     });
-
-    const response = await updatedCategory.save();
 
     return res.status(201).json({
       status: 201,

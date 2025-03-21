@@ -1,12 +1,17 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { User, UserRole } = require("../../models");
+const {
+  SessionService,
+  UserService,
+  UserRoleService
+} = require("../../services");
 
 async function signIn(req, res) {
   const { username, password, roleId } = req.body;
 
+  console.log(req.body, "req.body");
+
   // Check
-  if (username.trim() === "" || password.trim() === "") {
+  if (username.trim() === "") {
     return res.status(400).json({
       status: 400,
       message: "Username or password cannot be empty",
@@ -14,8 +19,8 @@ async function signIn(req, res) {
     });
   }
 
-  // Check if user exits
-  const getUserData = await User.findOne({ username });
+  // Check if user exits;
+  const getUserData = await UserService.existingUser(username);
 
   if (!getUserData) {
     return res.status(404).json({
@@ -36,12 +41,41 @@ async function signIn(req, res) {
   }
 
   // Check User role
-  const getUserRole = await UserRole.findOne({ user_id: getUserData.id });
+  console.log(roleId, "roleId");
+  const checkUserRole = await UserRoleService.checkUserRoleByUserId(
+    getUserData.id,
+    roleId
+  );
 
-  const token = jwt.sign({
-    id: getUserData.id,
-    username: getUserData.username,
-    role: getUserData.role
+  if (!checkUserRole) {
+    return res.status(403).json({
+      status: 403,
+      message: "User does not have the required role",
+      result: ""
+    });
+  }
+
+  // Create Session
+  const newSession = await SessionService.createSession(
+    getUserData.id,
+    "login"
+  );
+
+  // Save Session in cookie
+  res.cookie("session", newSession.token, {
+    userId: getUserData.id,
+    roleId: roleId,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    httpOnly: true
+  });
+
+  req.userData = { userId: getUserData.id, roleId: roleId };
+
+  return res.status(200).json({
+    status: 200,
+    message: "User signed in successfully",
+    result: "Success"
   });
 }
 

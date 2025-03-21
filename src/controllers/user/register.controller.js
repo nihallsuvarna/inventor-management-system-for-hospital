@@ -3,6 +3,7 @@ require("dotenv").config();
 const { User, Session, UserRole } = require("../../models");
 const { generateOpaqueToken } = require("../../utils");
 const { Op } = require("sequelize");
+const UserService = require("../../services/user.service");
 
 async function register(req, res) {
   try {
@@ -25,9 +26,10 @@ async function register(req, res) {
       });
     }
 
-    const existingUser = await User.findOne({
-      where: { [Op.or]: [{ username }, { email }] }
-    });
+    const existingUser = await UserService.existingUserWithUsernameOrEmail(
+      username,
+      email
+    );
 
     if (existingUser) {
       return res.status(400).json({
@@ -45,7 +47,7 @@ async function register(req, res) {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     // Create new User
-    const newUser = await User.create({
+    const newUser = await UserService.createUser({
       username,
       email,
       password: hashedPassword,
@@ -55,12 +57,10 @@ async function register(req, res) {
     });
 
     // Create Session
-    const newSession = await Session.create({
-      user_id: newUser.id,
-      token: generateOpaqueToken(),
-      type: "register",
-      expiresAt: new Date(Date.now() + 1000 * 60 * 60)
-    });
+    const newSession = await SessionService.createSession(
+      newUser.id,
+      "register"
+    );
 
     // Assign role to user
     if (role && role.length > 0) {

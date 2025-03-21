@@ -4,5 +4,14 @@ const categoryRoute = require("./category.route");
 const moduleRoute = require("./module.route");
 const itemRoute = require("./item.route");
 const supplierRoute = require("./supplier.route");
+const roleRoute = require("./role.route");
 
-module.exports = { userRoute, departmentRoute, categoryRoute, moduleRoute, itemRoute, supplierRoute };
+module.exports = {
+  userRoute,
+  departmentRoute,
+  categoryRoute,
+  moduleRoute,
+  itemRoute,
+  supplierRoute,
+  roleRoute
+};

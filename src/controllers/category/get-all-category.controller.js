@@ -1,9 +1,9 @@
-const { Category } = require("../../models");
+const { CategoryService } = require("../../services");
 
 async function getAllCategory(req, res) {
   try {
     // fetch data
-    const category = await Category.findAll();
+    const category = await CategoryService.listAllCategories();
     console.log(category, "category");
 
     if (!category) {

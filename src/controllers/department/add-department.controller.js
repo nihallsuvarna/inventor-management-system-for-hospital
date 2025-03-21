@@ -1,4 +1,4 @@
-const { Department } = require("../../models");
+const { DepartmentService } = require("../../services");
 
 async function addDepartment(req, res) {
   try {
@@ -12,7 +12,8 @@ async function addDepartment(req, res) {
       });
     }
 
-    const departmentData = await Department.findOne({ where: { key: key } });
+    const departmentData = await DepartmentService.getDepartmentByKey(key);
+
     // Check if department key is exist
     if (departmentData) {
       return res.status(403).json({
@@ -23,26 +24,16 @@ async function addDepartment(req, res) {
     }
 
     // Add new Department
-    const newDepartment = new Department({
-      ...req.body
+    const newDepartment = await DepartmentService.createDepartment({
+      label,
+      key
     });
 
-    newDepartment
-      .save()
-      .then((data) =>
-        res.status(201).json({
-          status: 201,
-          message: "Department Added Successfully",
-          result: data
-        })
-      )
-      .catch((err) =>
-        res.status(501).json({
-          status: 501,
-          message: "Something went wrong while adding department",
-          result: err
-        })
-      );
+    return res.status(201).json({
+      status: 201,
+      message: "Department Added Successfully",
+      result: newDepartment
+    });
   } catch (err) {
     console.log(err, "Something went wrong while adding department");
   }

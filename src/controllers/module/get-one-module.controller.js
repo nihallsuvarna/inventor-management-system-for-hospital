@@ -1,9 +1,9 @@
-const { Module } = require("../../models");
+const { ModuleService } = require("../../services");
 
 async function getModule(req, res) {
   try {
     const { label } = req.body;
-    const module = await Module.findOne({ where: { label } });
+    const module = await ModuleService.getModuleByLabel(label);
     if (!module) {
       return res.status(404).json({
         status: 404,

@@ -49,6 +49,9 @@ This is the Repo for Inventor Management System for Hospital
 
 
 ### Role
+#### 20-04-2025
+1. POST Add Role
+2. GET All Role
 
 ### Module
 #### 05-03-2025
@@ -61,3 +64,8 @@ This is the Repo for Inventor Management System for Hospital
 #### 03-04-2025
 1. generateOpaqueToken
 2. compareWithCurrentTime
+
+
+### Services
+#### 20-04-2025
+1.

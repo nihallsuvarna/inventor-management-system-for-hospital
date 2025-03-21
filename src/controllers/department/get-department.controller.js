@@ -1,8 +1,8 @@
-const { Department } = require("../../models");
+const { DepartmentService } = require("../../services");
 
 async function getDepartment(req, res) {
   try {
-    const allDepartment = await Department.findAll();
+    const allDepartment = await DepartmentService.listAllDepartments();
 
     if (!allDepartment) {
       return res.status(404).json({

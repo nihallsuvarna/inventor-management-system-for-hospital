@@ -1,11 +1,9 @@
-const { Item } = require("../../models");
+const { ItemsService } = require("../../services");
 
 async function listAllItems(req, res) {
-    console.log('object')
+  console.log("object");
   try {
-    const items = await Item.findAll({
-      order: [["label", "ASC"]]
-    });
+    const items = await ItemsService.listAllItemsByAlphabetOrder("ASC");
     if (!items) {
       return res.status(404).json({
         status: 404,

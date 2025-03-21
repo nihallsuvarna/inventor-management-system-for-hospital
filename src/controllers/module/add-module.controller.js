@@ -1,4 +1,4 @@
-const { Module } = require("../../models");
+const { ModuleService } = require("../../services");
 
 async function addModule(req, res) {
   try {
@@ -12,7 +12,7 @@ async function addModule(req, res) {
       });
     }
 
-    const module = await Module.findOne({ where: { label } });
+    const module = await ModuleService.getModuleByLabel(label);
 
     if (module) {
       return res.status(403).json({
@@ -22,7 +22,7 @@ async function addModule(req, res) {
       });
     }
 
-    const newModule = await Module.create({
+    const newModule = await ModuleService.createModule({
       label,
       description
     });

@@ -1,8 +1,8 @@
-const { Module } = require("../../models");
+const { ModuleService } = require("../../services");
 
 async function getModule(req, res) {
   try {
-    const module = await Module.findAll();
+    const module = await ModuleService.listAllModules();
     if (!module) {
       return res.status(404).json({
         status: 404,

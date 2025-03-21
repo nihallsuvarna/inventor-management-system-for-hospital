@@ -1,4 +1,4 @@
-const { Supplier } = require("../../models");
+const { SuppliersService } = require("../../services");
 
 async function addSuppliers(req, res) {
   try {
@@ -13,7 +13,7 @@ async function addSuppliers(req, res) {
     } = req.body;
 
     // check if supplier already exists
-    const checkSupplier = await Supplier.findOne({ where: { label } });
+    const checkSupplier = await SuppliersService.getSupplierByLabel(label);
     if (checkSupplier) {
       return res.status(404).json({
         status: 404,
@@ -23,7 +23,7 @@ async function addSuppliers(req, res) {
     }
 
     // Add supplier
-    const supplier = await Supplier.create({
+    const supplier = await SuppliersService.createSupplier({
       label,
       contact_info,
       address,

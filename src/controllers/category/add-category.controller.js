@@ -1,4 +1,4 @@
-const { Category } = require("../../models");
+const { CategoryService } = require("../../services");
 
 async function addCategory(req, res) {
   try {
@@ -12,7 +12,7 @@ async function addCategory(req, res) {
       });
     }
 
-    const category = await Category.findOne({ where: { key: key } });
+    const category = await CategoryService.getCategoryByKey(key);
 
     if (category) {
       return res.status(401).json({
@@ -22,7 +22,7 @@ async function addCategory(req, res) {
       });
     }
 
-    const newCategory = await Category.create({
+    const newCategory = await CategoryService.createCategory({
       label,
       description,
       key

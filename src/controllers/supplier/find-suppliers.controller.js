@@ -1,9 +1,9 @@
-const { Supplier } = require("../../models");
+const { SuppliersService } = require("../../services");
 
 async function findSuppliers(req, res) {
   try {
     const label = req.query.supplier;
-    const supplier = await Supplier.findOne({ where: { label } });
+    const supplier = await SuppliersService.getSupplierByLabel(label);
     if (!supplier) {
       return res.status(404).json({
         status: 404,
