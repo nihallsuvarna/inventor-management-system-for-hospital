@@ -7,6 +7,8 @@ const ItemsService = require("./items.service");
 const ModuleService = require("./module.service");
 const RoleService = require("./role.service");
 const SuppliersService = require("./suppliers.service");
+const BatchService = require("./batch.service");
+const OrderTypeService = require("./order_type.service");
 
 module.exports = {
   UserService,
@@ -17,5 +19,7 @@ module.exports = {
   ItemsService,
   ModuleService,
   RoleService,
-  SuppliersService
+  SuppliersService,
+  BatchService,
+  OrderTypeService
 };

@@ -28,10 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    expire_date: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
     location: {
       type: DataTypes.STRING,
       allowNull: false

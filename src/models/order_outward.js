@@ -7,15 +7,6 @@ module.exports = (sequelize, DataTypes) => {
       reference: db.OrderType,
       reference_key: "order_type"
     },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    transaction_inward_id: {
-      type: DataTypes.INTEGER,
-      reference: db.TransactionInward,
-      reference_key: "transaction_inward_id"
-    },
     order_date: {
       type: DataTypes.DATE,
       allowNull: false
@@ -31,10 +22,6 @@ module.exports = (sequelize, DataTypes) => {
     OrderOutward.belongsTo(models.OrderType, {
       foreignKey: "order_type_id",
       as: "orderType"
-    });
-    OrderOutward.belongsTo(models.TransactionInward, {
-      foreignKey: "transaction_inward_id",
-      as: "transactionInward"
     });
     OrderOutward.belongsTo(models.User, {
       foreignKey: "issued_by",

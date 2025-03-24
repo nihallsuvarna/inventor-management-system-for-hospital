@@ -35,6 +35,10 @@ This is the Repo for Inventor Management System for Hospital
 
 ### Order Outward
 
+### Order Outward Item
+
+### Transactions Inward
+
 ### Department
 #### 03-04-2025
 1. POST Add Department
@@ -68,4 +72,4 @@ This is the Repo for Inventor Management System for Hospital
 
 ### Services
 #### 20-04-2025
-1.
+1. Create Services for all the controllers

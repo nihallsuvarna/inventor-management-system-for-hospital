@@ -11,6 +11,29 @@ class ItemsService {
     return item;
   }
 
+  static async addItemByLabel(label, itemQuantity) {
+    const item = await Item.findOne({ where: { label } });
+
+    if (!item) {
+      throw new Error("Item not found");
+    }
+
+    const quantity = item.quantity + itemQuantity;
+
+    const [updatedRows] = await Item.update(
+      { quantity: quantity },
+      {
+        where: { label }
+      }
+    );
+
+    if (!updatedRows) {
+      throw new Error("Item update failed");
+    }
+
+    return await Item.findOne({ where: { label } });
+  }
+
   static async listAllItems() {
     const items = await Item.findAll();
     return items;

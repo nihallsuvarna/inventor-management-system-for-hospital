@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       reference: db.Item,
       reference_key: "item_id "
-    }
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   });
 
   return OrderInwardItem;

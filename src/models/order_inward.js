@@ -7,15 +7,6 @@ module.exports = (sequelize, DataTypes) => {
       reference: db.OrderType,
       reference_key: "order_type"
     },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    transaction_outward_id: {
-      type: DataTypes.INTEGER,
-      reference: db.TransactionOutward,
-      reference_key: "transaction_outward_id"
-    },
     order_date: {
       type: DataTypes.DATE,
       allowNull: false
