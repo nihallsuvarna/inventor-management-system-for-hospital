@@ -13,7 +13,13 @@ async function addOrderType(req, res) {
     const orderType = await OrderTypeService.getOrderTypeByKey(key);
 
     if (orderType) {
-      return res.status(400).json({ message: "Order type already exists" });
+      return res
+        .status(400)
+        .json({
+          status: 400,
+          message: "Order type already exists",
+          result: null
+        });
     }
 
     // Create order type
