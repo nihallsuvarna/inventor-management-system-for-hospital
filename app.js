@@ -12,7 +12,8 @@ const {
   itemRoute,
   supplierRoute,
   roleRoute,
-  orderTypeRoute
+  orderTypeRoute,
+  orderOutwardRoute
 } = require("./src/routes");
 
 const app = express();
@@ -33,6 +34,7 @@ app.use("/api/admin", supplierRoute);
 
 // Sales person
 app.use("/api/admin", orderTypeRoute);
+app.use("/api/admin", orderOutwardRoute);
 
 //Items
 app.use("/api/item", itemRoute);
