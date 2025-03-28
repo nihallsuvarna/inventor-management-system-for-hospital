@@ -7,6 +7,7 @@ const supplierRoute = require("./supplier.route");
 const roleRoute = require("./role.route");
 const orderTypeRoute = require("./order_type.route");
 const orderOutwardRoute = require("./order_outward.route");
+const customerRoute = require("./customer.route");
 
 module.exports = {
   userRoute,
@@ -17,5 +18,6 @@ module.exports = {
   supplierRoute,
   roleRoute,
   orderTypeRoute,
-  orderOutwardRoute
+  orderOutwardRoute,
+  customerRoute
 };

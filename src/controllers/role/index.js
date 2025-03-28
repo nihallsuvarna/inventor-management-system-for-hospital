@@ -55,7 +55,7 @@ async function addRole(req, res) {
 
 async function listRole(req, res) {
   try {
-    const role = await UserRole.findAll();
+    const role = await RoleService.listAllRoles();
     res.status(200).json({
       status: 200,
       message: "Roles retrieved successfully",

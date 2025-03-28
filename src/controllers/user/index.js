@@ -1,6 +1,10 @@
 const bcrypt = require("bcrypt");
 require("dotenv").config();
-const { UserService, SessionService, UserRoleService } = require("../../services");
+const {
+  UserService,
+  SessionService,
+  UserRoleService
+} = require("../../services");
 const { compareWithCurrentTime } = require("../../utils");
 const { UserRole } = require("../../models");
 
