@@ -30,12 +30,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Session.associated = function (models) {
-    Session.belongsTo(models.User, {
-      foreignKey: "user_id",
-      as: "user"
-    });
-  };
+  // Session.associated = function (models) {
+  //   Session.belongsTo(models.User, {
+  //     foreignKey: "user_id",
+  //     as: "user"
+  //   });
+  // };
 
   return Session;
 };

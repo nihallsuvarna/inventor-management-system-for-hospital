@@ -14,16 +14,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  UserRole.associated = function (models) {
-    UserRole.belongsTo(models.User, {
-      foreignKey: "user_id",
-      as: "user"
-    });
-    UserRole.belongsTo(models.Role, {
-      foreignKey: "role_id",
-      as: "role"
-    });
-  };
-
-  return UserRole
+  return UserRole;
 };

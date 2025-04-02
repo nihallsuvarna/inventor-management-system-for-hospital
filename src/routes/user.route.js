@@ -1,6 +1,12 @@
 const express = require("express");
 
-const { register, signIn, changePassword } = require("../controllers/user");
+const {
+  register,
+  signIn,
+  changePassword,
+  getAllUsers,
+  getUser
+} = require("../controllers/user");
 const { addRole } = require("../controllers/role");
 const { auth } = require("../middlewares");
 
@@ -12,7 +18,8 @@ route.post("/add-role", addRole);
 
 route.post("/sign-in", signIn);
 route.post("/change-password", changePassword);
-
+route.get("/get-user", getUser);
+route.get("/get-all-users", getAllUsers);
 
 // Role
 

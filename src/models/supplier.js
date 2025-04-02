@@ -33,12 +33,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Supplier.associate = function (models) {
-    Supplier.belongsTo(models.Category, {
-      foreignKey: "category_id",
-      as: "category"
-    });
-  };
+  // Supplier.associate = function (models) {
+  //   Supplier.belongsTo(models.Category, {
+  //     foreignKey: "category_id",
+  //     as: "category"
+  //   });
+  // };
 
   return Supplier;
 };

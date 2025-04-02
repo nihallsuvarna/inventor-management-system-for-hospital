@@ -18,24 +18,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  OrderOutward.associate = function (models) {
-    OrderOutward.belongsTo(models.OrderType, {
-      foreignKey: "order_type_id",
-      as: "orderType"
-    });
-    OrderOutward.belongsTo(models.User, {
-      foreignKey: "issued_by",
-      as: "user"
-    });
+  // OrderOutward.associate = function (models) {
+  //   OrderOutward.belongsTo(models.OrderType, {
+  //     foreignKey: "order_type_id",
+  //     as: "orderType"
+  //   });
+  //   OrderOutward.belongsTo(models.User, {
+  //     foreignKey: "issued_by",
+  //     as: "user"
+  //   });
 
-    // Many-to-many relationship with Items
-    OrderOutward.belongsToMany(models.Item, {
-      through: models.OrderOutwardItem,
-      foreignKey: "order_outward_id",
-      otherKey: "item_id",
-      as: "items"
-    });
-  };
+  //   // Many-to-many relationship with Items
+  //   OrderOutward.belongsToMany(models.Item, {
+  //     through: models.OrderOutwardItem,
+  //     foreignKey: "order_outward_id",
+  //     otherKey: "item_id",
+  //     as: "items"
+  //   });
+  // };
 
   return OrderOutward;
 };

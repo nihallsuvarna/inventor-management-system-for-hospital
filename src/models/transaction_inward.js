@@ -33,20 +33,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  TransactionInward.associate = function (models) {
-    TransactionInward.belongsTo(models.User, {
-      foreignKey: "user_id",
-      as: "user"
-    });
-    TransactionInward.belongsTo(models.Department, {
-      foreignKey: "department_id",
-      as: "department"
-    });
-    TransactionInward.belongsTo(models.OrderOutward, {
-      foreignKey: "order_outward_id",
-      as: "orderOutward"
-    });
-  };
+  // TransactionInward.associate = function (models) {
+  //   TransactionInward.belongsTo(models.User, {
+  //     foreignKey: "user_id",
+  //     as: "user"
+  //   });
+  //   TransactionInward.belongsTo(models.Department, {
+  //     foreignKey: "department_id",
+  //     as: "department"
+  //   });
+  //   TransactionInward.belongsTo(models.OrderOutward, {
+  //     foreignKey: "order_outward_id",
+  //     as: "orderOutward"
+  //   });
+  // };
 
   return TransactionInward;
 };

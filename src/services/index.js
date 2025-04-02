@@ -11,6 +11,7 @@ const BatchService = require("./batch.service");
 const OrderTypeService = require("./order_type.service");
 const OrderOutwardService = require("./order_outward.service");
 const OrderOutwardItemService = require("./order_outward_item.service");
+const CustomerService = require("./customer.service");
 
 module.exports = {
   UserService,
@@ -25,5 +26,6 @@ module.exports = {
   BatchService,
   OrderTypeService,
   OrderOutwardService,
-  OrderOutwardItemService
+  OrderOutwardItemService,
+  CustomerService
 };

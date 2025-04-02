@@ -260,10 +260,29 @@ async function signIn(req, res) {
   });
 }
 
+async function getUser(req, res) {
+  const { userId } = req.userData;
+  const user = await UserService.existingUserWithId(userId);
+  return res.status(200).json({
+    status: 200,
+    message: "User fetched successfully",
+    result: user
+  });
+}
+
+async function getAllUsers(req, res) {
+  const users = await UserService.getAllUsers();
+  return res.status(200).json({
+    status: 200,
+    message: "All users fetched successfully",
+    result: users
+  });
+}
+
 function validateEmail(email) {
   // Regular expression for validating an email
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 }
 
-module.exports = { signIn, register, changePassword };
+module.exports = { signIn, register, changePassword, getAllUsers, getUser };

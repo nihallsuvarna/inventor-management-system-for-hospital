@@ -39,24 +39,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Item.associate = function (models) {
-    Item.belongsTo(models.Category, {
-      foreignKey: "category_id",
-      as: "category"
-    });
+  // Item.associate = function (models) {
+  //   Item.belongsTo(models.Category, {
+  //     foreignKey: "category_id",
+  //     as: "category"
+  //   });
 
-    Item.belongsTo(models.Supplier, {
-      foreignKey: "supplier_id",
-      as: "supplier"
-    });
-    // Many-to-many relationship with OrderOutward
-    Item.belongsToMany(models.OrderOutward, {
-      through: models.OrderOutwardItem,
-      foreignKey: "item_id",
-      otherKey: "order_outward_id",
-      as: "orderOutwards"
-    });
-  };
+  //   Item.belongsTo(models.Supplier, {
+  //     foreignKey: "supplier_id",
+  //     as: "supplier"
+  //   });
+  //   // Many-to-many relationship with OrderOutward
+  //   Item.belongsToMany(models.OrderOutward, {
+  //     through: models.OrderOutwardItem,
+  //     foreignKey: "item_id",
+  //     otherKey: "order_outward_id",
+  //     as: "orderOutwards"
+  //   });
+  // };
 
   return Item;
 };

@@ -1,6 +1,11 @@
 const { User, UserRole } = require("../models");
 
 class UserService {
+  static async getAllUsers() {
+    const users = await User.findAll();
+    return users;
+  }
+
   static async existingUser(username) {
     const user = await User.findOne({ where: { username } });
     return user;

@@ -34,16 +34,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Permission.associate = function (models) {
-    Permission.belongTo(models.Role, {
-      foreignKey: "role_id",
-      as: "role"
-    });
-    Permission.belongTo(models.Module, {
-      foreignKey: "module_id",
-      as: "module"
-    });
-  };
+  // Permission.associate = function (models) {
+  //   Permission.belongTo(models.Role, {
+  //     foreignKey: "role_id",
+  //     as: "role"
+  //   });
+  //   Permission.belongTo(models.Module, {
+  //     foreignKey: "module_id",
+  //     as: "module"
+  //   });
+  // };
 
   return Permission;
 };

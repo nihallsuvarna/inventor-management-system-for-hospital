@@ -21,12 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Batch.associated = function (models) {
-    Batch.belongsTo(models.Item, {
-      foreignKey: "item_id",
-      as: "item"
-    });
-  };
+  // Batch.associated = function (models) {
+  //   Batch.belongsTo(models.Item, {
+  //     foreignKey: "item_id",
+  //     as: "item"
+  //   });
+  // };
 
   return Batch;
 };

@@ -35,6 +35,24 @@ db.Batch = require("./batch.js")(sequelize, DataTypes);
 
 console.log("Models running");
 
+// Associations
+// User Associations
+db.User.belongsTo(db.UserRole);
+
+
+// Department Associations
+db.Department.hasMany(db.User);
+db.Department.hasMany(db.TransactionInward);
+
+// Role Associations
+db.Role.belongsTo(db.UserRole);
+
+// Item Associations
+db.Item.hasMany(db.Batch);
+
+
+
+
 sequelize
   .authenticate()
   .then(() => {

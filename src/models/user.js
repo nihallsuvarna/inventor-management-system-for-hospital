@@ -17,8 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     department_id: {
       type: DataTypes.INTEGER,
-      references: db.Department,
-      references_key: "department_id"
+      references: {
+        model: "Department", // Corrected reference
+        key: "id" // Corrected reference key
+      }
     },
     address: {
       type: DataTypes.STRING,
@@ -30,12 +32,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  User.associate = function (models) {
-    User.belongsTo(models.Department, {
-      foreignKey: "department_id",
-      as: "department"
-    });
-  };
-
   return User;
 };
+
+// User.associate = function (models) {
+//   User.belongsTo(models.Department, {
+//     foreignKey: "department_id",
+//     as: "department"
+//   });
+//   User.hasMany(models.UserRole, { // Corrected to hasMany
+//     foreignKey: "user_id",
+//     as: "userRoles" // Corrected the alias to plural form
+//   });
+// };
