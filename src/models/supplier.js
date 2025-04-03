@@ -1,5 +1,3 @@
-const db = require(".");
-
 module.exports = (sequelize, DataTypes) => {
   const Supplier = sequelize.define("Supplier", {
     label: {
@@ -16,8 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     category_id: {
       type: DataTypes.INTEGER,
-      reference: db.Category,
-      reference_key: "category_id"
+      references: {
+        model: "Categories",
+        key: "id"
+      }
     },
     postal_code: {
       type: DataTypes.STRING,
@@ -32,13 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-
-  // Supplier.associate = function (models) {
-  //   Supplier.belongsTo(models.Category, {
-  //     foreignKey: "category_id",
-  //     as: "category"
-  //   });
-  // };
 
   return Supplier;
 };

@@ -1,5 +1,3 @@
-const db = require(".");
-
 module.exports = (sequelize, DataTypes) => {
     const Role = sequelize.define("Role", {
       label: {
@@ -15,11 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     });
-
-    // Role.belongsToMany(db.User, {
-    //   through: "UserRole",
-    //   foreignKey: "role_id"
-    // });
   
     return Role;
   };

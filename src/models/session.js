@@ -1,11 +1,11 @@
-const db = require(".");
-
 module.exports = (sequelize, DataTypes) => {
   const Session = sequelize.define("Session", {
     user_id: {
       type: DataTypes.INTEGER,
-      references: db.User,
-      references_key: "user_id"
+      references: {
+        model: "Users",
+        key: "id"
+      }
     },
     token: {
       type: DataTypes.STRING,
@@ -29,13 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-
-  // Session.associated = function (models) {
-  //   Session.belongsTo(models.User, {
-  //     foreignKey: "user_id",
-  //     as: "user"
-  //   });
-  // };
 
   return Session;
 };

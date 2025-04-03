@@ -1,21 +1,25 @@
-const db = require(".");
-
 module.exports = (sequelize, DataTypes) => {
   const TransactionInward = sequelize.define("TransactionInward", {
     user_id: {
       type: DataTypes.INTEGER,
-      references: db.User,
-      references_key: "user_id"
+      references: {
+        model: "Users",
+        key: "id"
+      }
     },
     department_id: {
       type: DataTypes.INTEGER,
-      references: db.Department,
-      references_key: "department_id"
+      references: {
+        model: "Departments",
+        key: "id"
+      }
     },
     order_outward_id: {
       type: DataTypes.INTEGER,
-      references: db.Order,
-      references_key: "order_id"
+      references: {
+        model: "OrderOutwards",
+        key: "id"
+      }
     },
     transaction_type: {
       type: DataTypes.ENUM("cash", "card", "online"),
@@ -32,21 +36,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-
-  // TransactionInward.associate = function (models) {
-  //   TransactionInward.belongsTo(models.User, {
-  //     foreignKey: "user_id",
-  //     as: "user"
-  //   });
-  //   TransactionInward.belongsTo(models.Department, {
-  //     foreignKey: "department_id",
-  //     as: "department"
-  //   });
-  //   TransactionInward.belongsTo(models.OrderOutward, {
-  //     foreignKey: "order_outward_id",
-  //     as: "orderOutward"
-  //   });
-  // };
 
   return TransactionInward;
 };

@@ -1,5 +1,3 @@
-const db = require(".");
-
 module.exports = (sequelize, DataTypes) => {
   const Item = sequelize.define("Item", {
     label: {
@@ -8,13 +6,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     category_id: {
       type: DataTypes.INTEGER,
-      reference: db.Category,
-      reference_key: "category_id"
+      references: {
+        model: "Categories",
+        key: "id"
+      }
     },
     supplier_id: {
       type: DataTypes.INTEGER,
-      reference: db.Supplier,
-      reference_key: "supplier_id"
+      references: {
+        model: "Suppliers",
+        key: "id"
+      }
     },
     manufacturing_date: {
       type: DataTypes.DATE,
@@ -38,25 +40,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: true
     }
   });
-
-  // Item.associate = function (models) {
-  //   Item.belongsTo(models.Category, {
-  //     foreignKey: "category_id",
-  //     as: "category"
-  //   });
-
-  //   Item.belongsTo(models.Supplier, {
-  //     foreignKey: "supplier_id",
-  //     as: "supplier"
-  //   });
-  //   // Many-to-many relationship with OrderOutward
-  //   Item.belongsToMany(models.OrderOutward, {
-  //     through: models.OrderOutwardItem,
-  //     foreignKey: "item_id",
-  //     otherKey: "order_outward_id",
-  //     as: "orderOutwards"
-  //   });
-  // };
 
   return Item;
 };

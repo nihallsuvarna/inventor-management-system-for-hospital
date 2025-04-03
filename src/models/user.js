@@ -1,5 +1,3 @@
-const db = require(".");
-
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define("User", {
     username: {
@@ -18,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     department_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "Department", // Corrected reference
+        model: "Departments", // Corrected reference
         key: "id" // Corrected reference key
       }
     },
@@ -34,14 +32,3 @@ module.exports = (sequelize, DataTypes) => {
 
   return User;
 };
-
-// User.associate = function (models) {
-//   User.belongsTo(models.Department, {
-//     foreignKey: "department_id",
-//     as: "department"
-//   });
-//   User.hasMany(models.UserRole, { // Corrected to hasMany
-//     foreignKey: "user_id",
-//     as: "userRoles" // Corrected the alias to plural form
-//   });
-// };

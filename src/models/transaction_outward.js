@@ -9,18 +9,24 @@ module.exports = (sequelize, DataTypes) => {
     },
     department_id: {
       type: DataTypes.INTEGER,
-      references: db.Department,
-      references_key: "department_id"
+      references: {
+        model: "Departments",
+        key: "id"
+      }
     },
     user_id: {
       type: DataTypes.INTEGER,
-      references: db.User,
-      references_key: "user_id"
+      references: {
+        model: "Users",
+        key: "id"
+      }
     },
     order_inward_id: {
       type: DataTypes.INTEGER,
-      references: db.OrderInward,
-      references_key: "order_inward_id"
+      references: {
+        model: "OrderInwards",
+        key: "id"
+      }
     },
     purchase_date: {
       type: DataTypes.DATE,
@@ -33,29 +39,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     supplier_id: {
       type: DataTypes.INTEGER,
-      reference: db.Supplier,
-      reference_key: "supplier_id"
+      references: {
+        model: "Suppliers",
+        key: "id"
+      }
     }
   });
-
-  // TransactionOutward.associate = function (models) {
-  //   TransactionOutward.belongsTo(models.User, {
-  //     foreignKey: "user_id",
-  //     as: "user"
-  //   });
-  //   TransactionOutward.belongsTo(models.Department, {
-  //     foreignKey: "department_id",
-  //     as: "department"
-  //   });
-  //   TransactionOutward.belongsTo(models.OrderOutward, {
-  //     foreignKey: "order_inward_id",
-  //     as: "orderInward"
-  //   });
-  //   TransactionOutward.belongsTo(models.Supplier, {
-  //     foreignKey: "supplier_id",
-  //     as: "supplier"
-  //   });
-  // };
 
   return TransactionOutward;
 };
