@@ -21,7 +21,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "seed-all": "npx sequelize-cli db:seed:all",
+    "seed-user": "npx sequelize-cli db:seed:all --seed users",
+    "seed-role": "npx sequelize-cli db:seed:all --seed roles",
+    "seed-permission": "npx sequelize-cli db:seed:all --seed permissions",
+    "seed-department": "npx sequelize-cli db:seed:all --seed departments",
+    "seed-category": "npx sequelize-cli db:seed:all --seed categories",
+    "seed-module": "npx sequelize-cli db:seed:all --seed modules",
+    "seed-item": "npx sequelize-cli db:seed:all --seed items",
+    "seed-supplier": "npx sequelize-cli db:seed:all --seed suppliers",
+    "seed-order-type": "npx sequelize-cli db:seed:all --seed order-types",
+    "seed-order-outward": "npx sequelize-cli db:seed:all --seed order-outwards",
+    "seed-customer": "npx sequelize-cli db:seed:all --seed customers",
+    "seed-undo": "npx sequelize-cli db:seed:undo:all"
   },
   "author": "Nihal L Suvarna",
   "license": "ISC",

@@ -11,7 +11,7 @@ const { UserRole } = require("../../models");
 async function changePassword(req, res) {
   try {
     const { username, oldPassword, newPassword } = req.body;
-
+    console.log("14", req.body);
     // check the inputs
     if (!username || !oldPassword || !newPassword) {
       return res.status(400).json({
@@ -22,7 +22,7 @@ async function changePassword(req, res) {
     }
 
     const user = await UserService.existingUser(username);
-
+    console.log("15", user);
     // Check if user exists
     if (!user) {
       return res.status(404).json({
@@ -31,7 +31,7 @@ async function changePassword(req, res) {
         result: null
       });
     }
-
+    console.log("16", user);
     // Check if user old password is correct
     if (!(await UserService.checkOldPassword(username, oldPassword))) {
       return res.status(401).json({
@@ -42,7 +42,7 @@ async function changePassword(req, res) {
 
     // compare old password
     const isPasswordMatching = await bcrypt.compare(oldPassword, user.password);
-
+    console.log("17", isPasswordMatching);
     if (!isPasswordMatching) {
       return res.status(401).json({
         status: 401,
@@ -64,7 +64,7 @@ async function changePassword(req, res) {
       user.id,
       "register"
     );
-
+    console.log("18", session);
     if (!session) {
       return res.status(403).json({
         status: 403,
@@ -80,7 +80,7 @@ async function changePassword(req, res) {
         return: null
       });
     }
-
+    console.log("19", session);
     // Hash new password
     const salted = parseInt(process.env.SALT, 10) || 10;
     const hashPassword = await bcrypt.hash(newPassword, salted);
@@ -89,7 +89,7 @@ async function changePassword(req, res) {
 
     // Remove old sessions
     await SessionService.deleteSessionByType(user.id, "register");
-
+    console.log("20", user);
     return res.status(200).json({
       status: 200,
       message: "Password Changed successfully",

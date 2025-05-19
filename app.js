@@ -14,7 +14,8 @@ const {
   roleRoute,
   orderTypeRoute,
   orderOutwardRoute,
-  customerRoute
+  customerRoute,
+  permissionRoute
 } = require("./src/routes");
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/admin", departmentRoute);
 app.use("/api/admin", categoryRoute);
 app.use("/api/admin", moduleRoute);
 app.use("/api/admin", supplierRoute);
+app.use("/api/admin", permissionRoute);
 
 // Sales person
 app.use("/api/admin", orderTypeRoute);

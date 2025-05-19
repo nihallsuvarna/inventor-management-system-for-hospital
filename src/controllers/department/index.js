@@ -2,7 +2,7 @@ const { DepartmentService } = require("../../services");
 
 async function addDepartment(req, res) {
   try {
-    const { label, key } = req.body;
+    const { label, key, description } = req.body;
     // check label
     if (label.trim() === "") {
       return res.status(400).json({
@@ -26,7 +26,8 @@ async function addDepartment(req, res) {
     // Add new Department
     const newDepartment = await DepartmentService.createDepartment({
       label,
-      key
+      key,
+      description
     });
 
     return res.status(201).json({

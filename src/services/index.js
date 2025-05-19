@@ -12,6 +12,7 @@ const OrderTypeService = require("./order_type.service");
 const OrderOutwardService = require("./order_outward.service");
 const OrderOutwardItemService = require("./order_outward_item.service");
 const CustomerService = require("./customer.service");
+const PermissionService = require("./permission.service");
 
 module.exports = {
   UserService,
@@ -27,5 +28,6 @@ module.exports = {
   OrderTypeService,
   OrderOutwardService,
   OrderOutwardItemService,
-  CustomerService
+  CustomerService,
+  PermissionService
 };

@@ -1,0 +1,11 @@
+const roles = require("../data/role-seed-data");
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert("Roles", roles, {});
+  },
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("Roles", null, {});
+  }
+};

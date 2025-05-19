@@ -1,3 +1,5 @@
+const { Op } = require("sequelize");
+const bcrypt = require("bcrypt");
 const { User, UserRole } = require("../models");
 
 class UserService {
@@ -23,7 +25,7 @@ class UserService {
 
   static async existingUserWithUsernameOrEmail(username, email) {
     const user = await User.findOne({
-      where: { [User.Op.or]: [{ username }, { email }] }
+      where: { [Op.or]: [{ username }, { email }] }
     });
     return user;
   }

@@ -1,6 +1,6 @@
 const { Op } = require("sequelize");
 const { Session } = require("../models");
-const { generateOpaqueToken } = require("../utils");
+const { generateOpaqueToken, compareWithCurrentTime } = require("../utils");
 
 class SessionService {
   static async createSession(userId, purpose) {
