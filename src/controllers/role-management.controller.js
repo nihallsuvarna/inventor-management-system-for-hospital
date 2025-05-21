@@ -177,7 +177,6 @@ async function getModulesAccessibleByRole(req, res) {
       message: "Modules fetched successfully",
       result: modules
     });
-    
   } catch (err) {
     console.log(err, "Something went wrong while getting modules");
     return res.status(501).json({
@@ -188,10 +187,81 @@ async function getModulesAccessibleByRole(req, res) {
   }
 }
 
+async function assignModuleToRole(req, res) {
+  try {
+    const { id } = req.params;
+    const { module_id, isRead, isWrite, isUpdate, isDelete } = req.body;
+
+    // check if role exists
+    const role = await RoleManagementService.checkIfRoleExistsById(id);
+    if (!role) {
+      return res.status(404).json({
+        status: 404,
+        message: "Role not found",
+        result: null
+      });
+    }
+
+    const module = await RoleManagementService.checkIfModuleExistsById(
+      module_id
+    );
+    if (!module) {
+      return res.status(404).json({
+        status: 404,
+        message: "Module not found",
+        result: null
+      });
+    }
+
+    // check if permission already exists
+    const permission = await RoleManagementService.checkIfPermissionExists(
+      id,
+      module_id
+    );
+    if (permission) {
+      return res.status(400).json({
+        status: 400,
+        message: "Permission already exists",
+        result: null
+      });
+    }
+
+    const newPermission = await RoleManagementService.createNewPermission(
+      id,
+      module_id,
+      isRead,
+      isWrite,
+      isUpdate,
+      isDelete
+    );
+
+    if (!newPermission) {
+      return res.status(400).json({
+        status: 400,
+        message: "Permission cannot be updated",
+        result: null
+      });
+    }
+
+    return res.status(200).json({
+      status: 200,
+      message: "Permission updated successfully",
+      result: newPermission
+    });
+  } catch (err) {
+    return res.status(501).json({
+      status: 501,
+      message: "Something went wrong while assigning module to role",
+      result: err
+    });
+  }
+}
+
 module.exports = {
   getAllRoles,
   createRole,
   updateRole,
   removeRole,
-  getModulesAccessibleByRole
+  getModulesAccessibleByRole,
+  assignModuleToRole
 };

@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Role, Permission, Module } = require("../models");
 
 class RoleManagementService {
@@ -36,11 +37,43 @@ class RoleManagementService {
       include: [
         {
           model: Module,
-          as: "module"
+          as: "module",
+          attributes: ["label", "key", "description"]
         }
       ]
     });
     return accessibleModules;
+  }
+
+  static async checkIfModuleExistsById(id) {
+    const module = await Module.findOne({ where: { id } });
+    return module;
+  }
+
+  static async createNewPermission(
+    roleId,
+    moduleId,
+    isRead,
+    isWrite,
+    isUpdate,
+    isDelete
+  ) {
+    const permission = await Permission.create({
+      role_id: roleId,
+      module_id: moduleId,
+      isRead,
+      isWrite,
+      isUpdate,
+      isDelete
+    });
+    return permission;
+  }
+
+  static async checkIfPermissionExists(roleId, moduleId) {
+    const permission = await Permission.findOne({
+      where: { [Op.and]: [{ role_id: roleId }, { module_id: moduleId }] }
+    });
+    return permission;
   }
 }
 
