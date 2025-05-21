@@ -3,6 +3,7 @@ const { getAllUsers, getAllUsersWithRole } = require("../controllers/user-manage
 const { auth, isModuleAccessible, authRole } = require("../middlewares");
 const router = express.Router();
 
+// Get all users
 router.get(
   "/user/get-all-users",
   auth,

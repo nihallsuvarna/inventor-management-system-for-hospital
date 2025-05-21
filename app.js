@@ -8,7 +8,8 @@ const {
   authRoute,
   dashboardRoute,
   userManagementRoute,
-  roleManagementRoute
+  roleManagementRoute,
+  departmentManagementRoute
 } = require("./src/routes");
 
 const app = express();
@@ -32,7 +33,8 @@ app.use(`${path}/api`, userManagementRoute);
 // Role Management
 app.use(`${path}/api`, roleManagementRoute);
 
-// app.use(`${path}/api`, userRoute);
+// Department Management
+app.use(`${path}/api`, departmentManagementRoute);
 
 // // Admin
 // app.use(`${path}/api`, departmentRoute);

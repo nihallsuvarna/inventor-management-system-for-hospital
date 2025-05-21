@@ -10,7 +10,10 @@ const {
 const { auth, authRole, isModuleAccessible } = require("../middlewares");
 const router = express.Router();
 
+// Get all roles
 router.get("/roles", auth, getAllRoles);
+
+// Create, update, and delete roles
 router.post(
   "/roles",
   auth,
@@ -34,6 +37,7 @@ router.delete(
   removeRole
 );
 
+// Assign modules to roles
 router.get(
   "/roles/:id/modules",
   auth,
@@ -42,6 +46,7 @@ router.get(
   getModulesAccessibleByRole
 );
 
+// Assign modules to roles
 router.post(
   "/roles/:id/modules",
   auth,

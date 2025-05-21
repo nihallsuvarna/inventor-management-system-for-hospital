@@ -9,8 +9,8 @@ const {
 } = require("../controllers/auth.controller");
 const { authRole, auth, isModuleAccessible } = require("../middlewares");
 
-router.post("/sign-in", authRole, signIn);
-router.post("/sign-out", signOut);
+router.post("/login", authRole, signIn);
+router.post("/logout", signOut);
 router.post(
   "/register",
   auth,
