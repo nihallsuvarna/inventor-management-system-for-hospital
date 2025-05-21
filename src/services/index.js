@@ -4,6 +4,7 @@ const DashboardService = require("./dashboard.service");
 const UserManagementService = require("./user-management.service");
 const RoleManagementService = require("./role-management.service");
 const DepartmentManagementService = require("./department-management.service");
+const InventorManagementService = require("./inventor-management.service");
 
 module.exports = {
   AuthService,
@@ -11,5 +12,6 @@ module.exports = {
   DashboardService,
   UserManagementService,
   RoleManagementService,
-  DepartmentManagementService
+  DepartmentManagementService,
+  InventorManagementService
 };

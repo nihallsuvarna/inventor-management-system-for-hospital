@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     contact_info: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false
     },
     address: {

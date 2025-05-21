@@ -34,6 +34,7 @@
     "seed-order-type": "npx sequelize-cli db:seed:all --seed order-types",
     "seed-order-outward": "npx sequelize-cli db:seed:all --seed order-outwards",
     "seed-customer": "npx sequelize-cli db:seed:all --seed customers",
+    "seed-batch": "npx sequelize-cli db:seed:all --seed batches",
     "seed-undo": "npx sequelize-cli db:seed:undo:all"
   },
   "author": "Nihal L Suvarna",

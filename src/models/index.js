@@ -49,15 +49,19 @@ db.Category.hasMany(db.Supplier);
 db.Category.hasMany(db.Item);
 
 // Item Associations
-db.Item.hasMany(db.Batch);
+db.Item.hasMany(db.Batch, { foreignKey: "item_id", as: "batch" });
 db.Item.belongsToMany(db.OrderOutward, {
   through: db.OrderOutwardItem,
-  foreignKey: "item_id"
+  foreignKey: "item_id",
+  as: "order_outward"
 });
 db.Item.belongsToMany(db.OrderInward, {
   through: db.OrderInwardItem,
-  foreignKey: "item_id"
+  foreignKey: "item_id",
+  as: "order_inward"
 });
+db.Item.belongsTo(db.Category, { foreignKey: "category_id", as: "category" });
+db.Item.belongsTo(db.Supplier, { foreignKey: "supplier_id", as: "supplier" });
 
 // Module Associations
 db.Module.hasMany(db.Permission, { foreignKey: "module_id" });
