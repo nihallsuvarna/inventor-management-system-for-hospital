@@ -60,7 +60,7 @@ db.Item.belongsToMany(db.OrderInward, {
 });
 
 // Module Associations
-db.Module.hasMany(db.Permission);
+db.Module.hasMany(db.Permission, { foreignKey: "module_id" });
 
 // OrderInwardItem Associations
 db.OrderInwardItem.belongsTo(db.OrderInward);
@@ -91,8 +91,8 @@ db.OrderType.hasMany(db.OrderInward);
 db.OrderType.hasMany(db.OrderOutward);
 
 // Permission Associations
-db.Permission.belongsTo(db.Module);
-db.Permission.belongsTo(db.Role);
+db.Permission.belongsTo(db.Module, { foreignKey: "module_id", as: "module" });
+db.Permission.belongsTo(db.Role, { foreignKey: "role_id", as: "role" });
 
 // Role Associations
 // db.Role.belongsTo(db.UserRole);

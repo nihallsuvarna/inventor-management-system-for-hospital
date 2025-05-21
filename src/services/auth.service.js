@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const { User, UserRole, Session, Role } = require("../models");
 const { generateOpaqueToken, compareWithCurrentTime } = require("../utils");
+const bcrypt = require("bcrypt");
 
 class AuthService {
   static async existingUser(username) {
@@ -85,6 +86,32 @@ class AuthService {
       return null;
     }
     return session;
+  }
+
+  static async createUser(userData) {
+    const user = await User.create(userData);
+    return user;
+  }
+
+  static async updateUserPassword(userId, password) {
+    const user = await User.update(
+      { password },
+      {
+        where: { id: userId }
+      }
+    );
+    return user;
+  }
+
+  static async checkUserPassword(userId, password) {
+    const user = await User.findOne({
+      where: { id: userId }
+    });
+    if (!user) {
+      return null;
+    }
+    const isPasswordMatching = await bcrypt.compare(password, user.password);
+    return isPasswordMatching;
   }
 }
 

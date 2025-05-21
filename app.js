@@ -7,7 +7,8 @@ require("dotenv").config();
 const {
   authRoute,
   dashboardRoute,
-  userManagementRoute
+  userManagementRoute,
+  roleManagementRoute
 } = require("./src/routes");
 
 const app = express();
@@ -20,13 +21,16 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Auth
-app.use(`${path}/api`, authRoute);
+app.use(`${path}/api/auth`, authRoute);
 
 // Dashboard
 app.use(`${path}/api`, dashboardRoute);
 
 // User Management
 app.use(`${path}/api`, userManagementRoute);
+
+// Role Management
+app.use(`${path}/api`, roleManagementRoute);
 
 // app.use(`${path}/api`, userRoute);
 

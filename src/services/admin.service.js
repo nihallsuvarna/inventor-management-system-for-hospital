@@ -3,17 +3,6 @@ const { User, Session, Role, Department } = require("../models");
 const { generateOpaqueToken } = require("../utils");
 
 class AdminService {
-  static async existingUserWithUsernameOrEmail(username, email) {
-    const user = await User.findOne({
-      where: { [Op.or]: [{ username }, { email }] }
-    });
-    return user;
-  }
-  static async createUser(userData) {
-    const user = await User.create(userData);
-    return user;
-  }
-
   static async createSession(userId, purpose) {
     const session = await Session.create({
       user_id: userId,
