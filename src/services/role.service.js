@@ -1,15 +1,7 @@
 const { Role } = require("../models");
 
 class RoleService {
-  static async getRoleById(roleId) {
-    const role = await Role.findOne({ where: { id: roleId } });
-    return role;
-  }
 
-  static async getRoleByKey(key) {
-    const role = await Role.findOne({ where: { key } });
-    return role;
-  }
 
   static async listAllRoles() {
     const roles = await Role.findAll();

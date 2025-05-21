@@ -8,6 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    key: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    }
   });
 
   return Module;

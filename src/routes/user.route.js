@@ -8,7 +8,7 @@ const {
   getUser
 } = require("../controllers/user");
 const { addRole } = require("../controllers/role");
-const { auth } = require("../middlewares");
+const { auth, authRole } = require("../middlewares");
 
 const route = express.Router();
 
@@ -16,7 +16,7 @@ const route = express.Router();
 route.post("/register", register);
 route.post("/add-role", addRole);
 
-route.post("/sign-in", signIn);
+route.post("/sign-in", authRole, signIn);
 route.post("/change-password", changePassword);
 route.get("/get-user", getUser);
 route.get("/get-all-users", getAllUsers);

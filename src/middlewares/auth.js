@@ -1,13 +1,17 @@
-const jwt = require("jsonwebtoken");
+const { AuthService } = require("../services");
 
-function auth(req, res, next) {
+async function auth(req, res, next) {
   try {
-    const { token } = req.cookies;
-    if (!token) {
+    const { access_token } = req.cookies;
+    if (!access_token) {
       return res.status(401).json({ message: "Authentication required" });
     }
-    const decode = jwt.verify(token, process.env.TOKEN_KEY);
-    req.userId = decode.userId;
+
+    const decode = await AuthService.getUserSession(access_token);
+    if (!decode) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+    req.userId = decode.user_id;
     next();
   } catch (err) {
     return res.status(401).json({

@@ -38,7 +38,7 @@ console.log("Models loaded successfully");
 
 // Associations
 // User Associations
-db.User.belongsTo(db.UserRole);
+// db.User.hasMany(db.UserRole);
 
 // Department Associations
 db.Department.hasMany(db.User);
@@ -114,12 +114,27 @@ db.TransactionInward.belongsTo(db.Department);
 db.TransactionOutward.belongsTo(db.OrderInward);
 db.TransactionOutward.belongsTo(db.Supplier);
 
+// Junction Tables
+db.User.belongsToMany(db.Role, {
+  through: db.UserRole,
+  foreignKey: "user_id",
+  otherKey: "role_id"
+});
+
+db.Role.belongsToMany(db.User, {
+  through: db.UserRole,
+  foreignKey: "role_id",
+  otherKey: "user_id"
+});
+
 // User Role Associations
-db.UserRole.belongsTo(db.User);
-db.UserRole.belongsTo(db.Role);
+db.User.hasMany(db.UserRole, { foreignKey: "user_id" });
+db.UserRole.belongsTo(db.User, { foreignKey: "user_id" });
+
+db.Role.hasMany(db.UserRole, { foreignKey: "role_id" });
+db.UserRole.belongsTo(db.Role, { foreignKey: "role_id" });
 
 // User Associations
-db.User.hasMany(db.UserRole);
 db.User.hasMany(db.Session);
 db.User.hasMany(db.OrderInward);
 db.User.hasMany(db.OrderOutward);

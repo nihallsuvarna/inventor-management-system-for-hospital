@@ -1,25 +1,10 @@
-const userRoute = require("./user.route");
-const departmentRoute = require("./department.route");
-const categoryRoute = require("./category.route");
-const moduleRoute = require("./module.route");
-const itemRoute = require("./item.route");
-const supplierRoute = require("./supplier.route");
-const roleRoute = require("./role.route");
-const orderTypeRoute = require("./order_type.route");
-const orderOutwardRoute = require("./order_outward.route");
-const customerRoute = require("./customer.route");
-const permissionRoute = require("./permission.route");
+const authRoute = require("./auth.route");
+const adminRoute = require("./admin.route");
+const dashboardRoute = require("./dashboard.route");
+const userManagementRoute = require("./user-management.route");
 
 module.exports = {
-  userRoute,
-  departmentRoute,
-  categoryRoute,
-  moduleRoute,
-  itemRoute,
-  supplierRoute,
-  roleRoute,
-  orderTypeRoute,
-  orderOutwardRoute,
-  customerRoute,
-  permissionRoute
+  authRoute,
+  dashboardRoute,
+  userManagementRoute
 };

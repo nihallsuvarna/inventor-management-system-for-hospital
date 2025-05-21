@@ -23,12 +23,6 @@ class UserService {
     return user;
   }
 
-  static async existingUserWithUsernameOrEmail(username, email) {
-    const user = await User.findOne({
-      where: { [Op.or]: [{ username }, { email }] }
-    });
-    return user;
-  }
 
   static async existingUserWithRole(username, roleId) {
     const user = await User.findOne({ where: { username } });
@@ -47,10 +41,6 @@ class UserService {
     return user;
   }
 
-  static async createUser(userData) {
-    const user = await User.create(userData);
-    return user;
-  }
 
   static async updateUser(userId, userData) {
     const user = await User.update(userData, {

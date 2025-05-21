@@ -108,6 +108,16 @@ const permissions = [
     isDelete: true,
     createdAt: new Date(),
     updatedAt: new Date()
+  },
+  {
+    module_id: 12,
+    role_id: 1,
+    isRead: true,
+    isUpdate: true,
+    isWrite: true,
+    isDelete: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ];
 

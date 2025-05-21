@@ -44,13 +44,5 @@ class UserRoleService {
     });
     return userRole;
   }
-
-  static async checkUserRoleByUserId(userId, roleId) {
-    const userRole = await UserRole.findOne({
-      where: { [Op.and]: [{ user_id: userId }, { role_id: roleId }] }
-    });
-    return userRole;
-  }
- 
 }
 module.exports = UserRoleService;

@@ -3,15 +3,6 @@ const { Session } = require("../models");
 const { generateOpaqueToken, compareWithCurrentTime } = require("../utils");
 
 class SessionService {
-  static async createSession(userId, purpose) {
-    const session = await Session.create({
-      user_id: userId,
-      token: generateOpaqueToken(),
-      type: purpose,
-      expiresAt: new Date(Date.now() + 1000 * 60 * 60)
-    });
-    return session;
-  }
 
   static async getSession(sessionId) {
     const session = await Session.findOne({ where: { session_id: sessionId } });
