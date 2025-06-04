@@ -5,7 +5,8 @@ const {
   updateRole,
   removeRole,
   getModulesAccessibleByRole,
-  assignModuleToRole
+  assignModuleToRole,
+  getAllUsersOfRole
 } = require("../controllers/role-management.controller");
 const { auth, authRole, isModuleAccessible } = require("../middlewares");
 const router = express.Router();
@@ -53,6 +54,14 @@ router.post(
   authRole,
   isModuleAccessible("role-management", "isWrite"),
   assignModuleToRole
+);
+
+router.get(
+  "/roles/:id/users",
+  auth,
+  authRole,
+  isModuleAccessible("role-management", "isRead"),
+  getAllUsersOfRole
 );
 
 module.exports = router;

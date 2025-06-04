@@ -41,7 +41,10 @@ console.log("Models loaded successfully");
 // db.User.hasMany(db.UserRole);
 
 // Department Associations
-db.Department.hasMany(db.User);
+db.Department.belongsTo(db.User, {
+  foreignKey: "department_id",
+  as: "users"
+});
 db.Department.hasMany(db.TransactionInward);
 
 // Category Associations
@@ -122,27 +125,37 @@ db.TransactionOutward.belongsTo(db.Supplier);
 db.User.belongsToMany(db.Role, {
   through: db.UserRole,
   foreignKey: "user_id",
-  otherKey: "role_id"
+  otherKey: "role_id",
+  as: "roles"
+});
+
+db.User.belongsTo(db.Department, {
+  foreignKey: "department_id",
+  as: "department"
 });
 
 db.Role.belongsToMany(db.User, {
   through: db.UserRole,
   foreignKey: "role_id",
-  otherKey: "user_id"
+  otherKey: "user_id",
+  as: "users"
 });
 
 // User Role Associations
-db.User.hasMany(db.UserRole, { foreignKey: "user_id" });
-db.UserRole.belongsTo(db.User, { foreignKey: "user_id" });
+db.User.hasMany(db.UserRole, { foreignKey: "user_id", otherKey: "role_id" });
+db.UserRole.belongsTo(db.User, { foreignKey: "user_id", otherKey: "role_id" });
 
-db.Role.hasMany(db.UserRole, { foreignKey: "role_id" });
-db.UserRole.belongsTo(db.Role, { foreignKey: "role_id" });
+db.Role.hasMany(db.UserRole, { foreignKey: "role_id", otherKey: "user_id" });
+db.UserRole.belongsTo(db.Role, {
+  foreignKey: "role_id",
+  otherKey: "user_id",
+  as: "roles"
+});
 
 // User Associations
 db.User.hasMany(db.Session);
 db.User.hasMany(db.OrderInward);
 db.User.hasMany(db.OrderOutward);
-db.User.belongsTo(db.Department);
 
 console.log("Associations set up successfully");
 

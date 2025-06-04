@@ -257,11 +257,52 @@ async function assignModuleToRole(req, res) {
   }
 }
 
+async function getAllUsersOfRole(req, res) {
+  try {
+    const { id } = req.params;
+
+    // Check if role already exists
+    const existingRole = await RoleManagementService.checkIfRoleExistsById(id);
+
+    if (!existingRole) {
+      return res.status(400).json({
+        status: 400,
+        message: "Role does not exist",
+        result: null
+      });
+    }
+
+    const users = await RoleManagementService.allUsersOfRole(id);
+
+    if (!users) {
+      return res.status(400).json({
+        status: 400,
+        message: "Users cannot be fetched",
+        result: null
+      });
+    }
+
+    return res.status(200).json({
+      status: 200,
+      message: "Users fetched successfully",
+      result: users
+    });
+  } catch (err) {
+    console.log(err, "Something went wrong while getting users of role");
+    return res.status(501).json({
+      status: 501,
+      message: "Something went wrong while getting users of role",
+      result: err
+    });
+  }
+}
+
 module.exports = {
   getAllRoles,
   createRole,
   updateRole,
   removeRole,
   getModulesAccessibleByRole,
-  assignModuleToRole
+  assignModuleToRole,
+  getAllUsersOfRole
 };

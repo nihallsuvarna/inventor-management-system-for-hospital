@@ -1,4 +1,4 @@
-const { Department } = require("../models");
+const { Department, User, Role } = require("../models");
 
 class DepartmentManagementService {
   static async allDepartments() {
@@ -25,6 +25,18 @@ class DepartmentManagementService {
 
   static async deleteDepartment(id) {
     return await Department.destroy({ where: { id } });
+  }
+
+  static async allUserOfDepartment(id) {
+    return await User.findAll({
+      where: {
+        department_id: id
+      },
+      include: [
+        { model: Role, as: "roles" },
+        { model: Department, as: "department" }
+      ]
+    });
   }
 }
 

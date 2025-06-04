@@ -3,7 +3,8 @@ const {
   getAllDepartments,
   createNewDepartment,
   updateDepartmentData,
-  deleteDepartmentData
+  deleteDepartmentData,
+  getAllDepartmentUsers
 } = require("../controllers/department-management.controller");
 const { auth, authRole, isModuleAccessible } = require("../middlewares");
 const router = express.Router();
@@ -43,5 +44,13 @@ router.delete(
   isModuleAccessible("department-management", "isDelete"),
   deleteDepartmentData
 );
+
+router.get(
+  "/department/:id",
+  auth,
+  authRole,
+  isModuleAccessible("department-management", "isRead"),
+  getAllDepartmentUsers
+)
 
 module.exports = router;

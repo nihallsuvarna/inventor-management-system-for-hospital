@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllUsers, getAllUsersWithRole } = require("../controllers/user-management.controller");
+const { getAllUsers, getAllUsersWithRole, getAllRolesOfUser } = require("../controllers/user-management.controller");
 const { auth, isModuleAccessible, authRole } = require("../middlewares");
 const router = express.Router();
 
@@ -12,6 +12,14 @@ router.get(
   getAllUsersWithRole
 );
 
+// Get All roles of user
+router.get(
+  "/user/roles/:id",
+  auth,
+  authRole,
+  isModuleAccessible("user-management", "isRead"),
+  getAllRolesOfUser
+)
 
 
 module.exports = router;

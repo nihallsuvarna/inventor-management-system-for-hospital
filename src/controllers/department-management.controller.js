@@ -154,9 +154,51 @@ async function deleteDepartmentData(req, res) {
   }
 }
 
+async function getAllDepartmentUsers(req, res) {
+  try {
+    const { id } = req.params;
+
+    const department =
+      await DepartmentManagementService.checkIfDepartmentExistsById(id);
+
+    if (!department) {
+      return res.status(400).json({
+        status: 400,
+        message: "Department does not exist",
+        result: null
+      });
+    }
+
+    const departmentUsers =
+      await DepartmentManagementService.allUserOfDepartment(id);
+
+    if (!departmentUsers) {
+      return res.status(400).json({
+        status: 400,
+        message: "Department does not exist",
+        result: null
+      });
+    }
+
+    return res.status(200).json({
+      status: 200,
+      message: "Department users fetched successfully",
+      result: departmentUsers
+    });
+  } catch (error) {
+    console.log(error, "Something went wrong while getting department users");
+    return res.status(501).json({
+      status: 501,
+      message: "Something went wrong while getting department users",
+      result: error
+    });
+  }
+}
+
 module.exports = {
   getAllDepartments,
   createNewDepartment,
   updateDepartmentData,
-  deleteDepartmentData
+  deleteDepartmentData,
+  getAllDepartmentUsers
 };

@@ -9,11 +9,26 @@ class UserManagementService {
     const users = await User.findAll({
       include: {
         model: UserRole,
-        include: [Role]
+        include: {
+          model: Role,
+          as: "roles",
+        }
       }
     });
 
     return users;
+  }
+
+  static async findUserRoleByUserId(userId) {
+    return await UserRole.findAll({
+      where: {
+        user_id: userId
+      },
+      include: {
+        model: Role,
+        as: "roles",
+      }
+    });
   }
 }
 

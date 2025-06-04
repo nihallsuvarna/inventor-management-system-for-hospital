@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Role, Permission, Module } = require("../models");
+const { Role, Permission, Module, User } = require("../models");
 
 class RoleManagementService {
   static async allRoles() {
@@ -75,6 +75,26 @@ class RoleManagementService {
     });
     return permission;
   }
+
+  static async allUsersOfRole(roleId) {
+    const users = await Role.findAll({
+      where: { id: roleId },
+      include: [
+        {
+          model: User,
+          as: "users",
+          attributes: [
+            "id",
+            "username",
+            "email",
+            "address",
+            "contact"
+          ]
+        }
+      ]
+    });
+    return users;
+  }
 }
 
-module.exports = RoleManagementService;
+module.exports = RoleManagementService; 
