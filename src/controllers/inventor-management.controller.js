@@ -1,4 +1,5 @@
 const { InventorManagementService } = require("../services");
+const BatchService = require("../services/batch.service");
 
 async function getAllInventors(req, res) {
   try {
@@ -24,6 +25,205 @@ async function getAllInventors(req, res) {
   }
 }
 
+async function getAllBatchDetails(req, res) {
+  try {
+    const batchDetails = await InventorManagementService.allBatchDetails();
+    return res.status(200).json({
+      status: 200,
+      message: "Batch details fetched successfully",
+      result: batchDetails
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: 500,
+      message: "Internal server error",
+      result: error
+    });
+  }
+}
+
+async function getAllBatchOfItem(req, res) {
+  try {
+    const itemId = req.params.id;
+
+    // Check if item exists
+    const item = await InventorManagementService.checkIfItemExistsById(itemId);
+    if (!item) {
+      return res.status(404).json({
+        status: 404,
+        message: "Item not found",
+        result: null
+      });
+    }
+
+    const batchDetails = await InventorManagementService.itemBatchDetails(
+      itemId
+    );
+
+    if (!batchDetails) {
+      return res.status(404).json({
+        status: 404,
+        message: "Batch details not found",
+        result: null
+      });
+    }
+
+    return res.status(200).json({
+      status: 200,
+      message: "Batch details fetched successfully",
+      result: batchDetails
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: 500,
+      message: "Internal server error",
+      result: error
+    });
+  }
+}
+
+async function addItem(req, res) {
+  const {
+    label,
+    category_id,
+    supplier_id,
+    manufacturing_date,
+    price,
+    quantity,
+    expire_date,
+    location,
+    in_store,
+    batch_id
+  } = req.body;
+
+  if (
+    !label ||
+    !category_id ||
+    !supplier_id ||
+    !manufacturing_date ||
+    !price ||
+    !quantity ||
+    !location ||
+    !batch_id
+  ) {
+    return res.status(400).json({
+      status: 400,
+      message: "All fields are required",
+      result: null
+    });
+  }
+
+  try {
+    const item = await InventorManagementService.getItemByLabel(label);
+    console.log(item, "item");
+
+    if (item) {
+      // check if batch exists
+      const batch = await BatchService.getBatchByBatchId(batch_id);
+
+      if (batch) {
+        return res.status(404).json({
+          status: 404,
+          message: "Batch Already exists",
+          result: batch
+        });
+      }
+
+      const updateItem = await InventorManagementService.addItemByLabel(label, quantity);
+      if (!updateItem) {
+        return res.status(404).json({
+          status: 404,
+          message: "Item not found",
+          result: null
+        });
+      }
+
+      console.log(updateItem, "updateItem");
+
+      const newBatch = await BatchService.createBatch({
+        item_id: updateItem.id,
+        batch_id,
+        quantity,
+        expire_date
+      });
+
+      if (!newBatch) {
+        return res.status(404).json({
+          status: 404,
+          message: "Batch not found",
+          result: null
+        });
+      }
+
+      return res.status(200).json({
+        status: 200,
+        message: "Item added",
+        result: updateItem
+      });
+    } else {
+      // check if batch exists
+      const batch = await BatchService.getBatchByBatchId(batch_id);
+
+      if (batch) {
+        return res.status(404).json({
+          status: 404,
+          message: "Batch Already exists",
+          result: batch
+        });
+      }
+
+      const newItem = await InventorManagementService.createItem({
+        label,
+        category_id,
+        supplier_id,
+        manufacturing_date,
+        price,
+        quantity,
+        location,
+        in_store
+      });
+      if (!newItem) {
+        return res.status(404).json({
+          status: 404,
+          message: "Item not found",
+          result: null
+        });
+      }
+      console.log(newItem, "newItem");
+      const newBatch = await BatchService.createBatch({
+        item_id: newItem.id,
+        batch_id,
+        quantity,
+        expire_date
+      });
+
+      if (!newBatch) {
+        return res.status(404).json({
+          status: 404,
+          message: "Batch not found",
+          result: null
+        });
+      }
+
+      return res.status(200).json({
+        status: 200,
+        message: "Item added",
+        result: newItem
+      });
+    }
+  } catch (err) {
+    console.log("Something went wrong while adding Item", err);
+    return res.status(501).json({
+      status: 501,
+      message: "Something went wrong while adding Item",
+      result: err
+    });
+  }
+}
+
 module.exports = {
-  getAllInventors
+  getAllInventors,
+  getAllBatchDetails,
+  getAllBatchOfItem,
+  addItem
 };
