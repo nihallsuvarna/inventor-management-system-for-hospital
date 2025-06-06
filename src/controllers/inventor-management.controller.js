@@ -25,6 +25,43 @@ async function getAllInventors(req, res) {
   }
 }
 
+async function getAllInventorsById(req, res) {
+  const { id } = req.params;
+  try {
+    // check if inventor exists
+    const inventor = await InventorManagementService.checkIfItemExistsById(id);
+    if (!inventor) {
+      return res.status(404).json({
+        status: 404,
+        message: "Inventor not found",
+        result: null
+      });
+    }
+
+    const items = await InventorManagementService.allInventorsById(id);
+
+    if (!items) {
+      return res.status(404).json({
+        status: 404,
+        message: "Inventor not found",
+        result: null
+      });
+    }
+
+    return res.status(200).json({
+      status: 200,
+      message: "Inventor fetched successfully",
+      result: items
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: "Internal server error",
+      result: error
+    });
+  }
+}
+
 async function getAllBatchDetails(req, res) {
   try {
     const batchDetails = await InventorManagementService.allBatchDetails();
@@ -129,7 +166,10 @@ async function addItem(req, res) {
         });
       }
 
-      const updateItem = await InventorManagementService.addItemByLabel(label, quantity);
+      const updateItem = await InventorManagementService.addItemByLabel(
+        label,
+        quantity
+      );
       if (!updateItem) {
         return res.status(404).json({
           status: 404,
@@ -144,7 +184,8 @@ async function addItem(req, res) {
         item_id: updateItem.id,
         batch_id,
         quantity,
-        expire_date
+        expire_date,
+        price
       });
 
       if (!newBatch) {
@@ -177,7 +218,6 @@ async function addItem(req, res) {
         category_id,
         supplier_id,
         manufacturing_date,
-        price,
         quantity,
         location,
         in_store
@@ -194,7 +234,8 @@ async function addItem(req, res) {
         item_id: newItem.id,
         batch_id,
         quantity,
-        expire_date
+        expire_date,
+        price
       });
 
       if (!newBatch) {
@@ -221,9 +262,81 @@ async function addItem(req, res) {
   }
 }
 
+async function updateItem(req, res) {
+  const { id } = req.params;
+
+  // Check if item exists
+  const item = await InventorManagementService.checkIfItemExistsById(id);
+  if (!item) {
+    return res.status(404).json({
+      status: 404,
+      message: "Item not found",
+      result: null
+    });
+  }
+
+  // check if body params are empty
+  const {
+    label,
+    category_id,
+    supplier_id,
+    manufacturing_date,
+    price,
+    quantity,
+    location,
+    expire_date,
+    batch_id
+  } = req.body;
+
+  if (
+    !label ||
+    !category_id ||
+    !supplier_id ||
+    !manufacturing_date ||
+    !quantity ||
+    !location ||
+    !batch_id ||
+    !price ||
+    !expire_date
+  ) {
+    return res.status(400).json({
+      status: 400,
+      message: "All fields are required",
+      result: null
+    });
+  }
+
+  try {
+    const item = await InventorManagementService.updateItemById(id, req.body);
+    if (!item) {
+      return res.status(404).json({
+        status: 404,
+        message: "Item not found",
+        result: null
+      });
+    }
+    console.log(item, "item");
+
+    return res.status(200).json({
+      status: 200,
+      message: "Item updated",
+      result: item
+    });
+  } catch (err) {
+    console.log("Something went wrong while updating Item", err);
+    return res.status(501).json({
+      status: 501,
+      message: "Something went wrong while updating Item",
+      result: err
+    });
+  }
+}
+
 module.exports = {
   getAllInventors,
+  getAllInventorsById,
   getAllBatchDetails,
   getAllBatchOfItem,
-  addItem
+  addItem,
+  updateItem
 };

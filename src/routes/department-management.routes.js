@@ -9,7 +9,7 @@ const {
 const { auth, authRole, isModuleAccessible } = require("../middlewares");
 const router = express.Router();
 
-// Get all departments
+// GET /departments: Get all departments.
 router.get(
   "/department",
   auth,
@@ -52,5 +52,13 @@ router.get(
   isModuleAccessible("department-management", "isRead"),
   getAllDepartmentUsers
 )
+
+// GET /departments/:id: Get a single department by ID.
+
+// POST /departments: Create a new department.
+
+// PUT /departments/:id: Update a department by ID.
+
+// DELETE /departments/:id: Delete a department by ID.
 
 module.exports = router;

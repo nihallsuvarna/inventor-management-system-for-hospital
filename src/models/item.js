@@ -22,10 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
-    price: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
-    },
+    // price: {
+    //   type: DataTypes.DECIMAL(10, 2),
+    //   allowNull: false
+    // },
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false

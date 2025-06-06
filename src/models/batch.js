@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     expire_date: {
       type: DataTypes.DATE,
       allowNull: false
+    },
+    price: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false
     }
   });
 

@@ -64,4 +64,40 @@ router.get(
   getAllUsersOfRole
 );
 
+// GET /roles: Get all roles.
+
+// GET /roles/:id: Get a single role by ID.
+
+// POST /roles: Create a new role.
+
+// PUT /roles/:id: Update a role by ID.
+
+// DELETE /roles/:id: Delete a role by ID.
+
+// GET /roles/modules/:moduleId: Get roles accessible by a specific module.
+
+// GET /roles/users/:userId: Get roles accessible by a specific user.
+
+// User Roles
+// GET /users/:userId/roles: Get roles for a specific user.
+
+// POST /users/:userId/roles: Assign a role to a user.
+
+// DELETE /users/:userId/roles/:roleId: Remove a role from a user.
+
+// Permissions
+// GET /permissions: Get all permissions.
+
+// GET /permissions/:id: Get a single permission by ID.
+
+// POST /permissions: Create a new permission.
+
+// PUT /permissions/:id: Update a permission by ID.
+
+// DELETE /permissions/:id: Delete a permission by ID.
+
+// GET /permissions/role/:roleId: Get permissions for a specific role.
+
+// GET /permissions/module/:moduleId: Get permissions for a specific module.
+
 module.exports = router;

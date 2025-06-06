@@ -5,7 +5,8 @@ const batchData = [
     quantity: 100,
     expire_date: new Date("2026-05-01"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 2.5
   },
   {
     item_id: 1,
@@ -13,7 +14,8 @@ const batchData = [
     quantity: 150,
     expire_date: new Date("2026-06-01"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 2.5
   },
   {
     item_id: 2,
@@ -21,7 +23,8 @@ const batchData = [
     quantity: 200,
     expire_date: new Date("2025-12-01"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 1.2
   },
   {
     item_id: 3,
@@ -29,7 +32,8 @@ const batchData = [
     quantity: 80,
     expire_date: new Date("2025-10-01"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 8.75
   },
   {
     item_id: 3,
@@ -37,7 +41,8 @@ const batchData = [
     quantity: 120,
     expire_date: new Date("2025-11-15"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 65.0
   },
   {
     item_id: 4,
@@ -45,7 +50,8 @@ const batchData = [
     quantity: 50,
     expire_date: new Date("2026-03-20"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 5.5
   },
   {
     item_id: 5,
@@ -53,7 +59,8 @@ const batchData = [
     quantity: 10,
     expire_date: new Date("2027-01-01"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 15.0
   },
   {
     item_id: 6,
@@ -61,7 +68,8 @@ const batchData = [
     quantity: 30,
     expire_date: new Date("2026-12-01"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 45.0
   },
   {
     item_id: 7,
@@ -69,7 +77,8 @@ const batchData = [
     quantity: 15,
     expire_date: new Date("2028-01-01"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 45.0
   },
   {
     item_id: 8,
@@ -77,7 +86,8 @@ const batchData = [
     quantity: 100,
     expire_date: new Date("2025-09-30"),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    price: 6.75
   }
 ];
 module.exports = batchData;

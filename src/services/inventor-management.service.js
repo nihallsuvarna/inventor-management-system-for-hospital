@@ -24,6 +24,29 @@ class InventorManagementService {
     return inventors;
   }
 
+  static async allInventorsById(id) {
+    const inventor = await Item.findByPk(id, {
+      include: [
+        {
+          model: Category,
+          as: "category",
+          attributes: ["label", "key", "description"]
+        },
+        {
+          model: Supplier,
+          as: "supplier",
+          attributes: ["label", "contact_info"]
+        },
+        {
+          model: Batch,
+          as: "batch",
+          attributes: ["batch_id", "quantity", "expire_date"]
+        }
+      ]
+    });
+    return inventor;
+  }
+
   static async allBatchDetails() {
     const batchDetails = await Batch.findAll();
     return batchDetails;
@@ -76,6 +99,13 @@ class InventorManagementService {
 
   static async createItem(itemData) {
     const item = await Item.create(itemData);
+    return item;
+  }
+
+  static async updateItemById(id, itemData) {
+    const item = await Item.update(itemData, {
+      where: { id }
+    });
     return item;
   }
 }
